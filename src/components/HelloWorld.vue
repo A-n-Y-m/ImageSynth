@@ -28,15 +28,26 @@
               single-line
               
             ></v-text-field>
+            <v-btn-toggle
+            color="light-blue"
+            v-model="toggle"
+            mandatory>
+            <v-btn value="25" style="justify-content:center;margin-bottom: 1.1%;" >
+            Low-Res
+          </v-btn>
+          <v-btn value="95" style="justify-content:center;margin-bottom: 1.1%;margin-left: 1.1%;" >
+            High-Res
+          </v-btn>
+        </v-btn-toggle>
           </v-col>
-          <v-btn @click="generate" style="justify-content:center;margin-bottom: 1.1%;" >
+          <v-btn @click="generate" style="justify-content:center;margin-bottom: 3.6%;" >
             <v-icon>mdi-play</v-icon>
           </v-btn>
           <v-col cols="6" style="padding-left: 15%">
             <v-card
               width="550"
               height="550"
-              style=" background-color: #e73c7e; border-radius: 5%"
+              style=" background-color: #4e93e2; border-radius: 5%;"
             >
               <v-card-item>
                 <v-img
@@ -71,6 +82,7 @@ import Swal from "sweetalert2";
 export default {
   data() {
     return {
+      toggle:1,
       text: "",
       url: "",
       buttonPress: false,
@@ -84,9 +96,13 @@ export default {
         this.lazy_url = this.url;
         this.url = null;
       }
+      var quality = this.toggle
+      if(quality==1){
+        quality==95
+      }
       var that = this;
       axios
-        .get("http://localhost:5000/data", { params: { inptext: this.text } })
+        .get("http://localhost:5000/data", { params: { inptext: this.text,quality:quality} })
         .then((response) => {
           if (response.data) {
             this.url = response.data;
@@ -117,7 +133,6 @@ export default {
 .body {
   background-image: radial-gradient(
     #ee7752,
-    #e73c7e,
     #4e93e2,
     #099b46,
     rgba(209, 81, 141, 0.937)
@@ -125,6 +140,11 @@ export default {
   background-size: 600% 600%;
   animation: gradient 20s ease infinite;
   height: 100vh;
+}
+
+.buttons{
+  display: flex;
+  align-items: flex-end;
 }
 
 .blue {
