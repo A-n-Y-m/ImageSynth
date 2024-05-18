@@ -10,12 +10,10 @@ import os
 import time
 def downres(img,qual):
   output_buffer = BytesIO()
-  print(type(qual))
   img.save(output_buffer, format='JPEG',quality=int(qual)) 
   output_buffer.seek(0)
   img_str = base64.b64encode(output_buffer.getvalue())
   img_str=img_str.decode("utf-8")
-  print(qual)
   return img_str
 
 
