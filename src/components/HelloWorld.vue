@@ -32,7 +32,7 @@
             color="light-blue"
             v-model="toggle"
             mandatory>
-            <v-btn value="25" style="justify-content:center;margin-bottom: 1.1%;" >
+            <v-btn value="10" style="justify-content:center;margin-bottom: 1.1%;" >
             Low-Res
           </v-btn>
           <v-btn value="95" style="justify-content:center;margin-bottom: 1.1%;margin-left: 1.1%;" >
@@ -105,7 +105,7 @@ export default {
       if(this.url !=""){
       var a = document.createElement("a"); //Create <a>
       a.href = this.url; //Image Base64 Goes here
-      a.download = "Image.png"; //File name Here
+      a.download = "Image.jpeg"; //File name Here
       a.click(); //Downloaded file
       }
     },
@@ -125,7 +125,7 @@ export default {
         .then((response) => {
           if (response.data) {
             this.url = response.data;
-            this.url = "data:image/png;base64," + this.url;
+            this.url = "data:image/jpeg;base64," + this.url;
           }
           this.buttonPress = false;
         })
