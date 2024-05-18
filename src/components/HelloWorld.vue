@@ -39,11 +39,14 @@
             High-Res
           </v-btn>
         </v-btn-toggle>
+        
           </v-col>
-          <v-btn @click="generate" style="justify-content:center;margin-bottom: 3.6%;" >
+          <v-col class="button">
+          <v-btn @click="generate" style="justify-content:center;margin-bottom: 50%;" >
             <v-icon>mdi-play</v-icon>
           </v-btn>
-          <v-col cols="6" style="padding-left: 15%">
+        </v-col>
+          <v-col cols="5" style="padding-left: 12%;">
             <v-card
               width="550"
               height="550"
@@ -52,6 +55,7 @@
               <v-card-item>
                 <v-img
                   class="pp mx-auto"
+                  sourceButton
                   height="500"
                   :lazy-src="lazy_url"
                   width="500"
@@ -69,7 +73,13 @@
                 </v-img>
               </v-card-item>
             </v-card>
+            
           </v-col>
+          <v-col class="button">
+          <v-btn  @click="download" style="justify-content:center;margin-bottom: 50%;margin-left:5px" >
+            <v-icon>mdi-download</v-icon>
+          </v-btn>
+        </v-col>
         </v-row>
       </v-container>
     </div>
@@ -79,6 +89,7 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+
 export default {
   data() {
     return {
@@ -90,6 +101,14 @@ export default {
     };
   },
   methods: {
+    download(){
+      if(this.url !=""){
+      var a = document.createElement("a"); //Create <a>
+      a.href = this.url; //Image Base64 Goes here
+      a.download = "Image.png"; //File name Here
+      a.click(); //Downloaded file
+      }
+    },
     generate() {
       this.buttonPress = true;
       if (this.url) {
@@ -121,6 +140,8 @@ export default {
         });
     },
   },
+  mounted(){
+  },
   computed: {
     imageSrc() {
       return new URL("../assets/sample.png", import.meta.url).href;
@@ -130,6 +151,10 @@ export default {
 </script>
 
 <style>
+html{
+  overflow: hidden;
+  
+}
 .body {
   background-image: radial-gradient(
     #ee7752,
@@ -141,10 +166,16 @@ export default {
   animation: gradient 20s ease infinite;
   height: 100vh;
 }
+.center {
+  
+  height: 200px;
+  border: 3px solid green;
+}
 
-.buttons{
+.button{
   display: flex;
-  align-items: flex-end;
+  justify-content:center ;
+  align-items: center;
 }
 
 .blue {
